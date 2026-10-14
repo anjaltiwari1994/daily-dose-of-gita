@@ -15,7 +15,7 @@ Last updated: 14 October 2026
 
 If this policy changes, the updated version will be posted here.
 
-Contact: [your email here]
+Contact: cosmicloom4u@gmail.com
 
 ## हिन्दी
 **Daily Dose of Gita** भगवद्गीता पढ़ने और अपनी स्थिति के अनुसार श्लोक खोजने वाला ऑफ़लाइन ऐप है।
@@ -27,4 +27,4 @@ Contact: [your email here]
 - **कोई तीसरा पक्ष नहीं:** हम एनालिटिक्स, विज्ञापन या ट्रैकिंग का उपयोग नहीं करते।
 - **यह ऐप डॉक्टर या काउंसलर का विकल्प नहीं है।** भारत में परेशानी हो तो Tele-MANAS 14416 पर कॉल करें (मुफ़्त, 24x7)।
 
-संपर्क: [अपना ईमेल यहाँ लिखें]
+संपर्क: cosmicloom4u@gmail.com
