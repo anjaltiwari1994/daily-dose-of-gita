@@ -19,6 +19,7 @@ jobs:
           java-version: 17
       - run: npm install
       - run: npx cap add android
+      - run: npx @capacitor/assets generate --android
       - run: npx cap sync android
       - name: Build debug APK
         run: cd android && chmod +x gradlew && ./gradlew assembleDebug
