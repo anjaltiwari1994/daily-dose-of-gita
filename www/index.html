@@ -6,6 +6,12 @@
 <meta name="theme-color" content="#140d2a">
 <title>Daily Dose of Gita</title>
 <link rel="stylesheet" href="style.css">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icon-180.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Daily Dose of Gita">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 </head>
 <body>
 <main id="view" aria-live="polite"></main>
@@ -13,5 +19,6 @@
 <script src="data.js"></script>
 <script src="mood.js"></script>
 <script src="app.js"></script>
+<script>if("serviceWorker" in navigator&&location.protocol.indexOf("http")===0)navigator.serviceWorker.register("sw.js").catch(function(){});</script>
 </body>
 </html>
