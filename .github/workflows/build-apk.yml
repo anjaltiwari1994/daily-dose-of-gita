@@ -3,6 +3,8 @@ on:
   workflow_dispatch:
   push:
     branches: [main]
+permissions:
+  contents: write
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -24,3 +26,10 @@ jobs:
         with:
           name: daily-dose-of-gita-apk
           path: android/app/build/outputs/apk/debug/app-debug.apk
+      - name: Publish APK as a release (download link)
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          cp android/app/build/outputs/apk/debug/app-debug.apk Daily-Dose-of-Gita.apk
+          gh release delete latest --yes --cleanup-tag || true
+          gh release create latest Daily-Dose-of-Gita.apk --title "Daily Dose of Gita (test APK)" --notes "Latest test build"
