@@ -259,7 +259,7 @@
       '<section class="card"><div class="row"><span id="nl">' + esc(t().notif) + '</span><button class="switch" id="notif" role="switch" aria-labelledby="nl" aria-checked="' + state.notif + '"></button></div>' +
       '<div class="row"><label for="time">' + esc(t().time) + '</label><input id="time" type="time" value="' + esc(state.time) + '" style="width:auto"></div>' +
       '<p class="note" id="notifNote">' + esc(native ? t().notifOn : t().notifWeb) + '</p></section>' +
-      '<p class="note">' + esc(t().about) + '</p><p class="note">' + esc(t().draft) + '</p>';
+      '<p class="note">' + esc(t().about) + '</p>';
   }
 
   /* ---------- render ---------- */
