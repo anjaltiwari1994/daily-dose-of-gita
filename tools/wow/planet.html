@@ -10,7 +10,7 @@ function fbm(x,y,z,o=5){let s=0,a=.5,f=1;for(let i=0;i<o;i++){s+=a*vn(x*f,y*f,z*
 const PRESETS={
  venus:{R:300,ramp:[[0,[104,52,22]],[.28,[170,92,34]],[.5,[222,152,66]],[.72,[246,208,140]],[1,[255,240,205]]],band:7,warp:1.5,glow:[255,170,80],rings:false,tilt:-.05},
  saturn:{R:215,ramp:[[0,[120,92,56]],[.3,[176,140,86]],[.55,[220,190,130]],[.8,[240,222,174]],[1,[252,244,214]]],band:16,warp:.5,glow:[255,214,150],rings:true,tilt:-.38},
- jupiter:{R:290,ramp:[[0,[96,52,36]],[.3,[160,96,60]],[.55,[214,168,120]],[.8,[240,224,196]],[1,[252,246,232]]],band:14,warp:.9,glow:[255,196,140],rings:false,tilt:-.03,spot:true},
+ jupiter:{R:290,ramp:[[0,[96,52,36]],[.3,[160,96,60]],[.55,[214,168,120]],[.8,[240,224,196]],[1,[252,246,232]]],band:15,warp:.5,glow:[255,196,140],rings:false,tilt:-.03,spot:true},
  mars:{R:280,ramp:[[0,[70,30,18]],[.35,[140,64,34]],[.65,[196,104,56]],[1,[232,160,100]]],band:3,warp:1.2,glow:[255,140,90],rings:false,tilt:-.1},
  neptune:{R:280,ramp:[[0,[16,40,110]],[.5,[40,90,200]],[1,[140,190,255]]],band:9,warp:.8,glow:[110,160,255],rings:false,tilt:-.05},
  moon:{R:280,ramp:[[0,[70,70,76]],[.5,[150,150,156]],[1,[225,225,228]]],band:2,warp:2.0,glow:[220,220,240],rings:false,tilt:0}
@@ -21,8 +21,9 @@ function buildTex(){tex=new Float32Array(TW*TH*3);for(let j=0;j<TH;j++){const la
 const px=Math.cos(lat)*Math.cos(lon),py=Math.sin(lat),pz=Math.cos(lat)*Math.sin(lon);
 const wx=fbm(px*2+5,py*2.4,pz*2+9,4),wy=fbm(px*2+11,py*2.4+3,pz*2,4);
 let n=fbm(px*2.2+wx*P.warp,py*P.band+wy*P.warp*.9,pz*2.2+wx*P.warp,6);n=clamp((n-.18)*1.55+.12*Math.sin(py*(P.band+2)+wy*3));
-if(P.spot){const sl=Math.PI*0.5-0.3;const dl=(lon-sl+Math.PI*3)%(2*Math.PI)-Math.PI,dla=lat-(-0.33);const e=(dl*dl)/(0.30*0.30)+(dla*dla)/(0.14*0.14);if(e<1.6){const k=Math.exp(-e*1.3);n=n*(1-k)+0.06*k;}}
-const c=col(n),k=(j*TW+i)*3;tex[k]=c[0];tex[k+1]=c[1];tex[k+2]=c[2]}}}
+const c=col(n),k=(j*TW+i)*3;
+if(P.spot){const sl=Math.PI*0.5-0.3;const dl=(lon-sl+Math.PI*3)%(2*Math.PI)-Math.PI,dla=lat-(-0.36);const e=(dl*dl)/(0.46*0.46)+(dla*dla)/(0.20*0.20);
+if(e<2.6){const kk=Math.pow(clamp(1-e/2.6),.7);const ring=clamp(1-Math.abs(e-1.15)/.5)*0.35;const tgt=[200,66,38];for(let q=0;q<3;q++){c[q]=c[q]*(1-kk*.93)+tgt[q]*kk*.93+ring*(236-c[q])*0.5}}}tex[k]=c[0];tex[k+1]=c[1];tex[k+2]=c[2]}}}
 const L=(()=>{const v=[-.78,.30,.55],n=Math.hypot(...v);return v.map(a=>a/n)})();
 function drawPlanet(theta){const R=P.R,tilt=P.tilt;const key=Math.round(theta*2000);if(key===lastTheta)return;lastTheta=key;const d=img.data,ct=Math.cos(tilt),st=Math.sin(tilt);
 for(let py=0;py<PS;py++)for(let px=0;px<PS;px++){const X=(px-PS/2+.5)/R,Y=-(py-PS/2+.5)/R,r2=X*X+Y*Y,o=(py*PS+px)*4;
@@ -52,7 +53,7 @@ function txt(s,x,y,font,color,al='center',ls=0,alpha=1,dy=0){if(alpha<=0)return;
 function fmt(v,dec){return dec?v.toFixed(dec):Math.floor(v+1e-9).toLocaleString('en-US')}
 function dial(cx,cy,rad,frac,colA,colB,label,big,unit,sub,alpha,pulse){ctx.save();ctx.globalAlpha=alpha;ctx.lineWidth=16;ctx.lineCap='round';ctx.strokeStyle='rgba(255,255,255,.09)';ctx.beginPath();ctx.arc(cx,cy,rad,0,6.283);ctx.stroke();
 if(frac>0){const g=ctx.createLinearGradient(cx-rad,cy-rad,cx+rad,cy+rad);g.addColorStop(0,colA);g.addColorStop(1,colB);ctx.strokeStyle=g;ctx.shadowColor=colB;ctx.shadowBlur=18+pulse*30;ctx.beginPath();ctx.arc(cx,cy,rad,-Math.PI/2,-Math.PI/2+6.283*Math.min(1,frac));ctx.stroke()}ctx.restore();
-txt(big,cx,cy-6,'700 70px Inter','#fff6e5','center',0,alpha);txt(unit,cx,cy+50,'600 17px Inter','#b8abd0','center',3,alpha);txt(label,cx,cy+rad+52,'700 27px Inter',colB,'center',3,alpha);txt(sub,cx,cy+rad+92,'400 24px Inter','#d9d0ea','center',0,alpha)}
+txt(big,cx,cy-6,'700 '+(big.length>=6?50:big.length>=5?58:70)+'px Inter','#fff6e5','center',0,alpha);txt(unit,cx,cy+50,'600 17px Inter','#b8abd0','center',3,alpha);txt(label,cx,cy+rad+52,'700 27px Inter',colB,'center',3,alpha);txt(sub,cx,cy+rad+92,'400 24px Inter','#d9d0ea','center',0,alpha)}
 async function setup(cfg){CFG=cfg;P=PRESETS[(cfg.planet&&cfg.planet.preset)||'venus'];tilt=P.tilt;PS=P.R*2+80;pc=document.createElement('canvas');pc.width=pc.height=PS;pctx=pc.getContext('2d');img=pctx.createImageData(PS,PS);buildTex();
 await document.fonts.load('800 40px Inter');await document.fonts.load('800 40px "Playfair Display"');return true}
 const T0=3.4,T1=11.0;
