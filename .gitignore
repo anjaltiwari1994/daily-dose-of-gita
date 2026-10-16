@@ -1,2 +1,2 @@
-node_modules
-android
+__pycache__/
+*.pyc
