@@ -25,23 +25,23 @@ function parts_(t){ctx.save();ctx.globalCompositeOperation='lighter';for(const p
 function heartPath(s){ctx.beginPath();ctx.moveTo(0,.85*s);ctx.bezierCurveTo(-1.35*s,-.05*s,-.75*s,-1*s,0,-.35*s);ctx.bezierCurveTo(.75*s,-1*s,1.35*s,-.05*s,0,.85*s);ctx.closePath()}
 function beatFn(u){u=((u%1)+1)%1;return Math.exp(-Math.pow((u-.06)/.05,2))+.65*Math.exp(-Math.pow((u-.3)/.06,2))}
 const PER=60/58;
-function positions(N){const cx=540,cy=880;if(N==1)return[[cx,cy]];if(N==2)return[[cx-190,cy],[cx+190,cy]];if(N==3)return[[cx,cy-170],[cx-195,cy+130],[cx+195,cy+130]];if(N==4)return[[cx-170,cy-150],[cx+170,cy-150],[cx-170,cy+150],[cx+170,cy+150]];const o=[];for(let i=0;i<N;i++){const a=i/N*6.283-1.5708;o.push([cx+Math.cos(a)*260,cy+Math.sin(a)*260])}return o}
+function positions(N){const cx=540,cy=880;if(N==1)return[[cx,cy]];if(N==2)return[[cx-190,cy],[cx+190,cy]];if(N==3)return[[cx,cy-170],[cx-195,cy+130],[cx+195,cy+130]];if(N==4)return[[cx-170,cy-150],[cx+170,cy-150],[cx-170,cy+150],[cx+170,cy+150]];if(N>=12){const cs=[[-215,-175],[215,-175],[-215,175],[215,175]],per=Math.ceil(N/4),o=[];for(let i=0;i<N;i++){const k=Math.floor(i/per),j=i%per,a=j/per*6.283-1.5708;o.push([cx+cs[k][0]+Math.cos(a)*68,cy+cs[k][1]+Math.sin(a)*68])}return o}const o=[];for(let i=0;i<N;i++){const a=i/N*6.283-1.5708;o.push([cx+Math.cos(a)*260,cy+Math.sin(a)*260])}return o}
 function frame(t){const zt=(window.__zt!==undefined)?window.__zt:t;const c=CFG,N=c.count||3,pal=c.orbRGB||[255,92,130],gl=c.glowRGB||[255,150,175];
 const push=1+.045*clamp(zt/DUR);ctx.save();ctx.translate(W/2,H/2);ctx.scale(push,push);ctx.translate(-W/2,-H/2);
 bg(t);for(const J of jellies)jelly(J,t);parts_(t);
-const pos=positions(N),gap=Math.min(1.4,5/N),ta=i=>3.0+i*gap;
+const SC=N>=12?.30:1,pos=positions(N),gap=Math.min(1.4,5/N),ta=i=>3.0+i*gap;
 // filaments
-ctx.save();ctx.globalCompositeOperation='lighter';for(let i=0;i<N;i++)for(let j=i+1;j<N;j++){const a=Math.min(ease(seg(t,ta(i)+.4,ta(i)+1.2)),ease(seg(t,ta(j)+.4,ta(j)+1.2)));if(a<=0)continue;const [x1,y1]=pos[i],[x2,y2]=pos[j];const mx=(x1+x2)/2+Math.sin(t*.8+i)*22,my=(y1+y2)/2+Math.cos(t*.7+j)*22;ctx.strokeStyle=`rgba(${gl[0]},${gl[1]},${gl[2]},${.28*a})`;ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(x1,y1);ctx.quadraticCurveTo(mx,my,x2,y2);ctx.stroke();
+ctx.save();ctx.globalCompositeOperation='lighter';if(N<=6)for(let i=0;i<N;i++)for(let j=i+1;j<N;j++){const a=Math.min(ease(seg(t,ta(i)+.4,ta(i)+1.2)),ease(seg(t,ta(j)+.4,ta(j)+1.2)));if(a<=0)continue;const [x1,y1]=pos[i],[x2,y2]=pos[j];const mx=(x1+x2)/2+Math.sin(t*.8+i)*22,my=(y1+y2)/2+Math.cos(t*.7+j)*22;ctx.strokeStyle=`rgba(${gl[0]},${gl[1]},${gl[2]},${.28*a})`;ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(x1,y1);ctx.quadraticCurveTo(mx,my,x2,y2);ctx.stroke();
 const u=((t*.45+i*.3+j*.17)%1),bx=(1-u)*(1-u)*x1+2*(1-u)*u*mx+u*u*x2,by=(1-u)*(1-u)*y1+2*(1-u)*u*my+u*u*y2;glow(bx,by,46,.9*a,gl)}ctx.restore();ctx.globalAlpha=1;
 // hearts
 pos.forEach(([x,y],i)=>{const a=ease(seg(t,ta(i),ta(i)+.9));if(a<=0)return;const u=(t-ta(i))/PER+ i*.0;const b=beatFn(u);const pulse=1+.14*b;const R=c.shape=='orb'?1:1;
-ctx.save();ctx.globalCompositeOperation='lighter';glow(x,y,560*pulse*a,.55*a+.25*b,[gl[0],gl[1],gl[2]],t);glow(x,y,300*pulse*a,.8*a,pal,t);
+ctx.save();ctx.globalCompositeOperation='lighter';glow(x,y,560*SC*pulse*a,.55*a+.25*b,[gl[0],gl[1],gl[2]],t);glow(x,y,300*SC*pulse*a,.8*a,pal,t);
 // shockwave ring on each beat
-const ph=((u%1)+1)%1;if(ph<.7){ctx.globalAlpha=(1-ph/.7)*.30*a;ctx.strokeStyle=`rgb(${gl[0]},${gl[1]},${gl[2]})`;ctx.lineWidth=4;ctx.beginPath();ctx.arc(x,y,100+ph*260,0,6.283);ctx.stroke()}
+const ph=((u%1)+1)%1;if(ph<.7&&N<12){ctx.globalAlpha=(1-ph/.7)*.30*a;ctx.strokeStyle=`rgb(${gl[0]},${gl[1]},${gl[2]})`;ctx.lineWidth=4;ctx.beginPath();ctx.arc(x,y,100+ph*260,0,6.283);ctx.stroke()}
 ctx.restore();ctx.globalAlpha=1;
 // the heart itself
-ctx.save();ctx.translate(x,y);ctx.scale(pulse*(.55+.45*a),pulse*(.55+.45*a));ctx.globalAlpha=a;const s=100;
-if(c.shape=='orb'){const g=ctx.createRadialGradient(-30,-40,10,0,0,110);g.addColorStop(0,'#fff');g.addColorStop(.3,`rgb(${gl[0]},${gl[1]},${gl[2]})`);g.addColorStop(1,`rgb(${pal[0]},${pal[1]},${pal[2]})`);ctx.fillStyle=g;ctx.shadowColor=`rgb(${pal[0]},${pal[1]},${pal[2]})`;ctx.shadowBlur=60;ctx.beginPath();ctx.arc(0,0,100,0,6.283);ctx.fill()}
+ctx.save();ctx.translate(x,y);ctx.scale(SC*pulse*(.55+.45*a),SC*pulse*(.55+.45*a));ctx.globalAlpha=a;const s=100;
+if(c.shape=='orb'||c.shape=='eye'){const g=ctx.createRadialGradient(-30,-40,10,0,0,110);g.addColorStop(0,'#fff');g.addColorStop(.3,`rgb(${gl[0]},${gl[1]},${gl[2]})`);g.addColorStop(1,`rgb(${pal[0]},${pal[1]},${pal[2]})`);ctx.fillStyle=g;ctx.shadowColor=`rgb(${pal[0]},${pal[1]},${pal[2]})`;ctx.shadowBlur=60;ctx.beginPath();ctx.arc(0,0,100,0,6.283);ctx.fill();if(c.shape=='eye'){ctx.shadowBlur=0;ctx.fillStyle='rgba(0,20,40,.88)';ctx.beginPath();ctx.ellipse(0,0,34,52,0,0,6.283);ctx.fill();ctx.fillStyle='rgba(255,255,255,.9)';ctx.beginPath();ctx.arc(-10,-18,11,0,6.283);ctx.fill()}}
 else{const g=ctx.createRadialGradient(-.35*s,-.45*s,.05*s,0,0,1.2*s);g.addColorStop(0,'#fff0f4');g.addColorStop(.28,`rgb(${gl[0]},${gl[1]},${gl[2]})`);g.addColorStop(.75,`rgb(${pal[0]},${pal[1]},${pal[2]})`);g.addColorStop(1,`rgb(${Math.floor(pal[0]*.45)},${Math.floor(pal[1]*.3)},${Math.floor(pal[2]*.4)})`);ctx.fillStyle=g;ctx.shadowColor=`rgba(${pal[0]},${pal[1]},${pal[2]},.95)`;ctx.shadowBlur=50+40*b;heartPath(s);ctx.fill();ctx.shadowBlur=0;ctx.globalAlpha=a*.5;ctx.strokeStyle='rgba(255,255,255,.7)';ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(-.62*s,-.25*s);ctx.bezierCurveTo(-.6*s,-.62*s,-.3*s,-.78*s,-.08*s,-.52*s);ctx.stroke()}
 ctx.restore();ctx.globalAlpha=1});
 ctx.restore(); // zoom

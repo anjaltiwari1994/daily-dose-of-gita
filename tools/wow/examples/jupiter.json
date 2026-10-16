@@ -1,0 +1,7 @@
+{"engine":"planet","music":"cosmic","events":[[8.5,659.3,0.3],[11.0,987.8,0.4]],
+ "kicker":"DID YOU KNOW?","head1":"Jupiter has a storm","head2":"bigger than Earth.",
+ "planet":{"preset":"jupiter","spinTurns":0.893,"cy":830},
+ "dials":[{"label":"EARTH","value":12742,"scale":16000,"unit":"KM ACROSS","sub":"Earth's diameter","colA":"#8be3ff","colB":"#4aa8ff","endNote":"✓ EARTH"},
+          {"label":"GREAT RED SPOT","value":16000,"unit":"KM WIDE","sub":"Jupiter's giant storm","colA":"#ff9a6b","colB":"#ff5a3d","endNote":"✓ STORM"}],
+ "tag":"WIDTH","final1":"The Great Red Spot is about 16,000 km wide.","final2":"That is roughly 1.3 Earths side by side.",
+ "handle":"@your.dailydoseofwow","source":"Data: NASA"}

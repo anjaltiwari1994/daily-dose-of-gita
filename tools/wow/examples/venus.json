@@ -1,0 +1,7 @@
+{"engine":"planet","music":"cosmic","events":[[10.35,659.3,0.35],[11.0,987.8,0.45],[11.0,659.3,0.2]],
+ "kicker":"DID YOU KNOW?","head1":"A day on Venus","head2":"is longer than its year.",
+ "planet":{"preset":"venus","spinTurns":1},
+ "dials":[{"label":"ONE YEAR","value":225,"unit":"EARTH DAYS","sub":"one trip around the Sun","colA":"#ffb347","colB":"#ff7a3d","endNote":"✓ YEAR ENDS"},
+          {"label":"ONE DAY","value":243,"unit":"EARTH DAYS","sub":"one full spin","colA":"#9ad7ff","colB":"#7b8cff","endNote":"✓ DAY ENDS"}],
+ "tag":"TIME-LAPSE","final1":"243 days to spin once. 225 to circle the Sun.","final2":"It even spins backwards: the Sun rises in the west.",
+ "handle":"@your.dailydoseofwow","source":"Data: NASA Venus Fact Sheet"}

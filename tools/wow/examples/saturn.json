@@ -1,0 +1,53 @@
+{
+ "engine": "planet",
+ "music": "cosmic",
+ "events": [
+  [
+   8.0,
+   659.3,
+   0.3
+  ],
+  [
+   11.0,
+   987.8,
+   0.4
+  ]
+ ],
+ "kicker": "DID YOU KNOW?",
+ "head1": "Saturn is lighter",
+ "head2": "than water.",
+ "planet": {
+  "preset": "saturn",
+  "spinTurns": 0.6,
+  "cy": 820
+ },
+ "dials": [
+  {
+   "label": "SATURN",
+   "value": 0.69,
+   "scale": 1.0,
+   "decimals": 2,
+   "unit": "G / CM³",
+   "sub": "Saturn: average density",
+   "colA": "#ffd88a",
+   "colB": "#ffb347",
+   "endNote": "✓ LIGHTER"
+  },
+  {
+   "label": "WATER",
+   "value": 1.0,
+   "scale": 1.0,
+   "decimals": 2,
+   "unit": "G / CM³",
+   "sub": "Water, for comparison",
+   "colA": "#8be3ff",
+   "colB": "#4aa8ff",
+   "endNote": "✓ DENSER"
+  }
+ ],
+ "tag": "DENSITY",
+ "final1": "Saturn is mostly hydrogen and helium.",
+ "final2": "In a pool big enough, it would float.",
+ "handle": "@your.dailydoseofwow",
+ "source": "Data: NASA Saturn Fact Sheet"
+}
