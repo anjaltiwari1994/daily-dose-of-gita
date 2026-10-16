@@ -4,6 +4,8 @@ Usage: python3 tools/render_reel.py input.json out.mp4   (input.json = ONE card 
 import json, sys, os, tempfile, subprocess, html
 sys.path.insert(0, os.path.dirname(__file__))
 import render_cards as rc
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'wow'))
+import music
 
 FPS, DUR, OFF = 24, 20.0, 235   # animation ends ~9s, then the last frame is held until DUR
 COVER_FRAMES = 3                # first frames show the finished layout (Instagram uses frame 0 as the cover)
@@ -36,5 +38,7 @@ if __name__ == '__main__':
         for i in range(n):
             pg.evaluate(TICK, [9.6 if i < COVER_FRAMES else i / FPS, 0 if i < COVER_FRAMES else i / FPS]); pg.screenshot(path=f'{tmp}/f{i:04d}.jpg', type='jpeg', quality=93)
         b.close()
-    subprocess.run(['ffmpeg', '-y', '-loglevel', 'error', '-framerate', str(FPS), '-i', f'{tmp}/f%04d.jpg', '-c:v', 'libx264', '-pix_fmt', 'yuv420p', '-crf', '18', '-movflags', '+faststart', out], check=True)
+    music.make('gita', DUR, f'{tmp}/m.wav')
+    subprocess.run(['ffmpeg', '-y', '-loglevel', 'error', '-i', f'{tmp}/m.wav', '-af', 'aecho=0.8:0.7:90|180:0.35|0.2,lowpass=f=5000', f'{tmp}/m2.wav'], check=True)
+    subprocess.run(['ffmpeg', '-y', '-loglevel', 'error', '-framerate', str(FPS), '-i', f'{tmp}/f%04d.jpg', '-i', f'{tmp}/m2.wav', '-c:v', 'libx264', '-pix_fmt', 'yuv420p', '-crf', '18', '-c:a', 'aac', '-b:a', '160k', '-shortest', '-movflags', '+faststart', out], check=True)
     print('wrote', out)
