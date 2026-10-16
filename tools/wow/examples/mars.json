@@ -1,7 +1,53 @@
-{"engine":"planet","music":"cosmic","events":[[8.5,659.3,0.3],[11.0,987.8,0.4]],
- "kicker":"DID YOU KNOW?","head1":"Mars has a volcano","head2":"3x taller than Everest.","h2size":62,
- "planet":{"preset":"mars","spinTurns":0.5,"cy":830},
- "dials":[{"label":"MOUNT EVEREST","value":8.8,"scale":25,"decimals":1,"unit":"KM HIGH","sub":"above sea level","colA":"#8be3ff","colB":"#4aa8ff","endNote":"✓ EVEREST"},
-          {"label":"OLYMPUS MONS","value":25,"unit":"KM HIGH","sub":"the tallest volcano known","colA":"#ffb06b","colB":"#ff6a3d","endNote":"✓ OLYMPUS MONS"}],
- "tag":"HEIGHT","final1":"Olympus Mons is nearly three times higher than Everest.","final2":"Its slopes are so gentle that climbing it would not be hard.","f1size":29,
- "handle":"@your.dailydoseofwow","source":"Data: NASA, ESA"}
+{
+ "engine": "planet",
+ "music": "cosmic",
+ "events": [
+  [
+   8.5,
+   659.3,
+   0.3
+  ],
+  [
+   11.0,
+   987.8,
+   0.4
+  ]
+ ],
+ "kicker": "DID YOU KNOW?",
+ "head1": "Mars has a volcano",
+ "head2": "nearly 3x as tall as Everest.",
+ "h2size": 58,
+ "planet": {
+  "preset": "mars",
+  "spinTurns": 0.5,
+  "cy": 830
+ },
+ "dials": [
+  {
+   "label": "MOUNT EVEREST",
+   "value": 8.8,
+   "scale": 25,
+   "decimals": 1,
+   "unit": "KM HIGH",
+   "sub": "above sea level",
+   "colA": "#8be3ff",
+   "colB": "#4aa8ff",
+   "endNote": "✓ EVEREST"
+  },
+  {
+   "label": "OLYMPUS MONS",
+   "value": 25,
+   "unit": "KM HIGH",
+   "sub": "volcano on Mars",
+   "colA": "#ffb06b",
+   "colB": "#ff6a3d",
+   "endNote": "✓ OLYMPUS MONS"
+  }
+ ],
+ "tag": "HEIGHT",
+ "final1": "Olympus Mons is nearly three times higher than Everest.",
+ "final2": "It is the tallest known volcano in the solar system.",
+ "f1size": 29,
+ "handle": "@your.dailydoseofwow",
+ "source": "Data: NASA, ESA"
+}
