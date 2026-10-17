@@ -1,0 +1,148 @@
+[
+ {
+  "file": "w_chandrayaan3_south_pole",
+  "scene": "moonsurface",
+  "earth": [
+   850,
+   190,
+   72
+  ],
+  "lander": [
+   540,
+   640,
+   3.2
+  ],
+  "seed": 21,
+  "tag": "INDIA FACT",
+  "head1": "INDIA LANDED NEAR",
+  "head2": "THE MOON'S SOUTH POLE.",
+  "detail": "On 23 August 2023, ISRO's Chandrayaan-3 made India [[the first country]] to soft-land near the Moon's south pole.",
+  "handle": "@your.dailydoseofwow",
+  "source": "Data: ISRO"
+ },
+ {
+  "file": "w_heart_100k_beats",
+  "scene": "pulse",
+  "seed": 5,
+  "tag": "BODY FACT",
+  "head1": "YOUR HEART BEATS",
+  "head2": "ABOUT 100,000 TIMES A DAY.",
+  "detail": "That adds up to [[more than 35 million beats a year]], and you never have to think about a single one.",
+  "handle": "@your.dailydoseofwow",
+  "source": ""
+ },
+ {
+  "file": "w_titan_methane_lakes",
+  "scene": "space",
+  "planet": {
+   "preset": "titan",
+   "x": 540,
+   "y": 480,
+   "R": 265
+  },
+  "planet2": {
+   "preset": "saturn",
+   "x": 890,
+   "y": 200,
+   "R": 62,
+   "light": [
+    -0.9,
+    0.3,
+    0.4
+   ]
+  },
+  "seed": 8,
+  "tag": "SPACE FACT",
+  "head1": "SATURN'S MOON TITAN",
+  "head2": "HAS LAKES OF LIQUID METHANE.",
+  "detail": "Apart from Earth, Titan is [[the only world we know]] with liquid on its surface, but its lakes are methane and ethane, not water.",
+  "handle": "@your.dailydoseofwow",
+  "source": "Data: NASA"
+ },
+ {
+  "file": "w_ocean_half_oxygen",
+  "scene": "ocean",
+  "creature": "plankton",
+  "tint": [
+   6,
+   70,
+   90
+  ],
+  "seed": 3,
+  "tag": "OCEAN FACT",
+  "head1": "EVERY OTHER BREATH",
+  "head2": "COMES FROM THE OCEAN.",
+  "detail": "Tiny drifting ocean plants called phytoplankton produce [[about half of Earth's oxygen]].",
+  "handle": "@your.dailydoseofwow",
+  "source": "Data: NOAA"
+ },
+ {
+  "file": "w_mawsynram_rain_record",
+  "scene": "rainhills",
+  "seed": 14,
+  "tag": "INDIA FACT",
+  "head1": "THIS INDIAN VILLAGE",
+  "head2": "GOT 26,000 MM OF RAIN IN A YEAR.",
+  "detail": "Mawsynram in Meghalaya holds a [[Guinness World Record]] for 26,000 mm of rain in 1985, and averages nearly 12,000 mm a year.",
+  "handle": "@your.dailydoseofwow",
+  "source": "Data: Guinness World Records"
+ },
+ {
+  "file": "w_jupiter_auroras",
+  "scene": "space",
+  "planet": {
+   "preset": "jupiter",
+   "x": 540,
+   "y": 480,
+   "R": 265,
+   "aurora": true,
+   "rot": 0.6
+  },
+  "seed": 17,
+  "tag": "SPACE FACT",
+  "head1": "JUPITER'S AURORAS",
+  "head2": "ARE BIGGER THAN EARTH.",
+  "detail": "Its northern and southern lights are [[hundreds of times more energetic]] than Earth's, and glow brightest in ultraviolet.",
+  "handle": "@your.dailydoseofwow",
+  "source": "Data: NASA / Hubble"
+ },
+ {
+  "file": "w_blue_whale_heart",
+  "scene": "ocean",
+  "creature": "whale",
+  "heart": true,
+  "wx": 500,
+  "wy": 480,
+  "ws": 0.95,
+  "seed": 9,
+  "tag": "ANIMAL FACT",
+  "head1": "A BLUE WHALE'S HEART",
+  "head2": "WEIGHS ABOUT 180 KG.",
+  "detail": "That's about [[as heavy as a piano]], pumping blood through the largest animal known to have ever lived.",
+  "handle": "@your.dailydoseofwow",
+  "source": "Data: NOAA Fisheries"
+ },
+ {
+  "file": "w_lightning_8_million",
+  "scene": "storm",
+  "bolts": [
+   [
+    690,
+    190,
+    0.9
+   ],
+   [
+    260,
+    230,
+    0.55
+   ]
+  ],
+  "seed": 4,
+  "tag": "EARTH FACT",
+  "head1": "LIGHTNING STRIKES",
+  "head2": "8 MILLION TIMES A DAY.",
+  "detail": "That's [[around 100 flashes every second]], somewhere on our planet, right now.",
+  "handle": "@your.dailydoseofwow",
+  "source": "Data: CDC / NOAA"
+ }
+]
