@@ -22,3 +22,8 @@ Scenes (`scene`) and their options:
 - `pulse`: glowing red heart with a neon heartbeat line. Fits: heart, blood, body and health facts.
 - `rainhills`: misty green layered hills in heavy rain. Fits: rain, monsoon, mountains, forests, Indian geography.
 If no scene fits a fact well, pick a different fact rather than a mismatched picture.
+
+## Carousel second slide (both pages)
+`python3 tools/render_slide.py slides.json outdir` makes slide 2 of a 2-slide carousel (1080x1350, same colours):
+pill, a short title, 2-3 numbered points and a share line naming who to send it to. theme 'wow' or 'gita'.
+Name it `<slide-1 file>_s2`. Schedule both images in one Metricool post (media [slide1, slide2], instagramData type POST).

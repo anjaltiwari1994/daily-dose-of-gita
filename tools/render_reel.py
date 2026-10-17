@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
-"""Animated Gita Reel (1080x1920 mp4, silent) from the same design as render_cards.py. No credits.
+"""Animated Gita Reel (1080x1920 mp4, 11 s, with music) from the same design as render_cards.py. No credits.
+The video starts with the brand, mood pill and hook ALREADY on screen (hook in the first second), then the verse and meaning
+animate in; the finished layout holds from about 7 s to the end. Schedule with videoCoverMilliseconds 10500 (last frame = cover).
 Usage: python3 tools/render_reel.py input.json out.mp4   (input.json = ONE card object, same fields as render_cards.py)"""
 import json, sys, os, tempfile, subprocess, html
 sys.path.insert(0, os.path.dirname(__file__))
@@ -7,8 +9,9 @@ import render_cards as rc
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'wow'))
 import music
 
-FPS, DUR, OFF = 24, 20.0, 235   # animation ends ~9s, then the last frame is held until DUR
-COVER_FRAMES = 3                # first frames show the finished layout (Instagram uses frame 0 as the cover)
+FPS, DUR, OFF = 24, 11.0, 235   # video length 11 s
+START = 2.0                     # animation time at video frame 0: hook is already fully visible (it finishes at 1.9)
+COVER_FRAMES = 0                # no cover flash; the cover is chosen in Metricool (videoCoverMilliseconds 10500)
 def build(p):
     base = rc.page(p)
     base = base.replace('<style>', '<style>body{height:1920px!important}#wrap{position:absolute;left:0;top:%dpx;width:1080px;height:1350px;transform-origin:50%% 45%%}' % OFF, 1)
@@ -36,7 +39,7 @@ if __name__ == '__main__':
         pg.set_content(build(p)); pg.wait_for_timeout(500); pg.evaluate(PREP); pg.wait_for_timeout(200)
         n = int(FPS * DUR)
         for i in range(n):
-            pg.evaluate(TICK, [9.6 if i < COVER_FRAMES else i / FPS, 0 if i < COVER_FRAMES else i / FPS]); pg.screenshot(path=f'{tmp}/f{i:04d}.jpg', type='jpeg', quality=93)
+            pg.evaluate(TICK, [9.6 if i < COVER_FRAMES else START + i / FPS, 0 if i < COVER_FRAMES else i / FPS]); pg.screenshot(path=f'{tmp}/f{i:04d}.jpg', type='jpeg', quality=93)
         b.close()
     music.make('gita', DUR, f'{tmp}/m.wav')
     subprocess.run(['ffmpeg', '-y', '-loglevel', 'error', '-i', f'{tmp}/m.wav', '-af', 'aecho=0.8:0.7:90|180:0.35|0.2,lowpass=f=5000', f'{tmp}/m2.wav'], check=True)

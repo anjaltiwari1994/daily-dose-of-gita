@@ -1,11 +1,13 @@
 # Wow reel engines (free, no credits)
 
-Run:  `python3 tools/wow/render.py cfg.json out.mp4`  -> 1080x1920, 20 s, music included.
-Frames 0-2 show the finished layout (cover). The animation ends at about 14 s and the last frame holds until 20 s,
-so people can read it. Always set `videoCoverMilliseconds: 19500` when scheduling in Metricool.
+Run:  `python3 tools/wow/render.py cfg.json out.mp4`  -> 1080x1920, 13.5 s, music included.
+The video starts 2.3 s into the animation, so the headline and the planet/scene are ON SCREEN IN THE FIRST FRAME
+(the hook must land in the first second; most viewers swipe within 3 s). The final takeaway lines appear at about
+9-11 s and hold to the end. Always set `videoCoverMilliseconds: 13000` when scheduling in Metricool.
+Because the headline is the hook, write head1/head2 as a curiosity line, not a label (e.g. 'Saturn would FLOAT' / 'in a giant bathtub.').
 Fonts (Playfair Display, Inter) are fetched once from github.com/google/fonts via render_cards.ensure_fonts().
-Render time is about 2.5 minutes per reel. Open frames with ffmpeg and look at them before scheduling:
-`ffmpeg -ss 6 -i out.mp4 -frames:v 1 f.png` (also 12 and 19), then Read the PNGs. Check nothing is cut off.
+Render time is about 1.5 minutes per reel. Open frames with ffmpeg and look at them before scheduling:
+`ffmpeg -ss 6 -i out.mp4 -frames:v 1 f.png` (also 0, 10 and 13), then Read the PNGs. Check nothing is cut off.
 
 ## Engine "planet" (space facts that compare two numbers)
 Fits facts such as: two numbers shown in two counting dials next to a spinning planet.
