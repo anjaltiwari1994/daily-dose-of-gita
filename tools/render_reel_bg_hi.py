@@ -12,7 +12,7 @@ def page(p):
     for a, b in [("DAILY DOSE OF GITA", "दैनिक गीता सार"), ("font:500 28px 'Playfair Display';letter-spacing:6.2px", "font:400 38px 'Tiro Devanagari Hindi'"),
         ("font:700 22px 'Inter';letter-spacing:3.5px", "font:700 26px 'Noto Sans Devanagari'"), ("font:700 60px 'Playfair Display'", "font:700 56px 'Noto Serif Devanagari'"),
         ("— Bhagavad Gita ", "— श्रीमद्भगवद्गीता "), ("font:500 22px 'Inter'", "font:500 24px 'Noto Sans Devanagari'"),
-        ("font:400 33px 'Lora';line-height:46px", "font:400 32px 'Noto Serif Devanagari';line-height:52px"), ("@daily.doseofgita<", "@daily.doseofgita.hindi<"), ("top:1565px", "top:1605px")]:
+        ("font:400 33px 'Lora';color:#FFF6E5;line-height:46px", "font:400 32px 'Noto Serif Devanagari';color:#FFF6E5;line-height:52px"), ("@daily.doseofgita<", "@daily.doseofgita.hindi<"), ("top:1565px", "top:1605px")]:
         assert a in h, a
         h = h.replace(a, b)
     return h.replace('<html><head>', '<html><head><meta charset="utf-8">', 1)
