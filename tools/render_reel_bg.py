@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
-"""Gita Reel (1080x1920 mp4, 11 s, music) over a supplied background image (e.g. made in ChatGPT). No credits.
+"""Gita Reel (1080x1920 mp4, 14 s, music) over a supplied background image (e.g. made in ChatGPT). No credits.
 Usage: python3 tools/render_reel_bg.py input.json out.mp4
-input.json = {"bg":"path.png","hook":"..","pill":"..","san":"line1\\nline2","ref":"6.25","mean":".."}
+input.json = {"bg":"path.png","hook":"..","pill":"..","san":"line1\\nline2","ref":"6.25","mean":"2-3 line saar (centred)"}
 Brand, pill and hook are on screen from frame 0; Sanskrit lines, ref and meaning build in by ~5 s; bg slowly zooms. Cover = last frame (videoCoverMilliseconds 10500)."""
 import json, sys, os, tempfile, subprocess, base64, html
 sys.path.insert(0, os.path.dirname(__file__)); sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'wow'))
 import render_cards as rc, music
-FPS, DUR = 24, 11.0
+FPS, DUR = 24, 14.0
 def page(p):
     b64 = base64.b64encode(open(p['bg'], 'rb').read()).decode()
     san = '</div><div class="ln">'.join(html.escape(l) for l in p['san'].split('\n'))
@@ -24,20 +24,20 @@ body{{width:1080px;height:1920px;position:relative;overflow:hidden;background:#0
 #ss{{top:1235px;font:400 46px 'Tiro Devanagari Hindi';color:#E8B84A;line-height:74px}}
 .ln{{white-space:nowrap}}
 #ref{{top:1390px;font:500 22px 'Inter';color:#B2A7CA;letter-spacing:1px}}
-#ml{{top:1440px;font:400 33px 'Lora';color:#FFF6E5;line-height:46px;padding:0 90px}}
-#hd{{top:1565px;font:500 26px 'Inter';color:#B2A7CA}}
+#ml{{top:1440px;font:400 33px 'Lora';color:#FFF6E5;line-height:46px;padding:0 80px}}
+#hd{{top:1650px;font:500 26px 'Inter';color:#B2A7CA}}
 </style></head><body><div id="bg"></div><div id="top"></div><div id="bot"></div><canvas id="fx" width="1080" height="1920"></canvas>
 <div class="abs" id="brand">DAILY DOSE OF GITA</div><div id="pill">{html.escape(p['pill'])}</div><div class="abs" id="hook">{html.escape(p['hook'])}</div>
 <div class="abs" id="ss"><div class="ln">{san}</div></div><div class="abs" id="ref">— Bhagavad Gita {p['ref']} —</div>
 <div class="abs" id="ml">{words}</div><div class="abs" id="hd">@daily.doseofgita</div></body></html>"""
 FITJS = """()=>{const h=document.getElementById('hook');let s=60;const hw=()=>{const r=document.createRange();r.selectNodeContents(h);return r.getBoundingClientRect().width};while(hw()>980&&s>34){s--;h.style.fontSize=s+'px';}
-const ss=document.getElementById('ss');ss.querySelectorAll('.ln').forEach(l=>{});let z=46;const w=()=>{let m=0;ss.querySelectorAll('.ln').forEach(l=>{const r=document.createRange();r.selectNodeContents(l);m=Math.max(m,r.getBoundingClientRect().width)});return m};while(w()>980&&z>30){z--;ss.style.fontSize=z+'px';}return s+' '+z;}"""
+const ss=document.getElementById('ss');ss.querySelectorAll('.ln').forEach(l=>{});let z=46;const w=()=>{let m=0;ss.querySelectorAll('.ln').forEach(l=>{const r=document.createRange();r.selectNodeContents(l);m=Math.max(m,r.getBoundingClientRect().width)});return m};while(w()>980&&z>30){z--;ss.style.fontSize=z+'px';}const ml=document.getElementById('ml');let f=parseFloat(getComputedStyle(ml).fontSize);const rt=parseFloat(getComputedStyle(ml).lineHeight)/f;while(ml.getBoundingClientRect().height>3*f*rt+2&&f>22){f--;ml.style.fontSize=f+'px';ml.style.lineHeight=(f*rt)+'px';}return s+' '+z+' saar:'+f+' lines:'+Math.round(ml.getBoundingClientRect().height/(f*rt));}"""
 TICK = """(t)=>{const e=(a,b)=>Math.min(1,Math.max(0,(t-a)/(b-a))),s=x=>x*x*(3-2*x);
 const show=(sel,a,b,dy=24)=>{document.querySelectorAll(sel).forEach((el,i)=>{const k=s(e(a[i]??a[0],b[i]??b[0]));el.style.opacity=k;el.style.transform=(el.id=='pill'?'translateX(-50%) ':'')+'translateY('+((1-k)*dy)+'px)';});};
 show('#brand',[-1],[-0.5]);show('#pill',[-1],[-0.5]);show('#hook',[-1],[-0.5]);
 show('.ln',[0.2],[0.9]);show('#ref',[1.0],[1.5],12);show('#hd',[2.2],[2.8],10);
-const ws=[...document.querySelectorAll('.w')];ws.forEach((w,i)=>{const a=1.5+i*(3.4/ws.length);w.style.opacity=s(e(a,a+0.35));});
-document.getElementById('bg').style.transform='scale('+(1+0.09*Math.min(1,t/11))+') translateY('+(-14*Math.min(1,t/11))+'px)';
+const ws=[...document.querySelectorAll('.w')];ws.forEach((w,i)=>{const a=1.5+i*(5.5/ws.length);w.style.opacity=s(e(a,a+0.35));});
+document.getElementById('bg').style.transform='scale('+(1+0.09*Math.min(1,t/14))+') translateY('+(-14*Math.min(1,t/14))+'px)';
 const cv=document.getElementById('fx'),x=cv.getContext('2d');x.clearRect(0,0,1080,1920);
 const rd=(i,m,c)=>{const v=Math.sin(i*m)*c;return v-Math.floor(v);};
 x.save();x.shadowColor='rgba(255,200,110,0.9)';x.shadowBlur=12;
