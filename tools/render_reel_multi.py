@@ -18,7 +18,7 @@ def page(p):
     old = "top:1180px;width:1080px;height:740px;background:linear-gradient(180deg,rgba(8,12,37,0) 0%,rgba(8,12,37,.9) 28%,#080C25 55%)"
     assert old in h
     h = h.replace(old, "top:1050px;width:1080px;height:870px;background:linear-gradient(180deg,rgba(8,12,37,0) 0%,rgba(8,12,37,.88) 22%,#080C25 40%)")
-    h = h.replace('</style>', '.bgl{position:absolute;left:0;top:0;width:1080px;height:1920px;background-size:cover;background-position:center;transform-origin:50% 55%;opacity:0}</style>', 1)
+    h = h.replace('</style>', '.bgl{position:absolute;left:0;top:0;width:1080px;height:1920px;background-size:cover;background-position:center;transform-origin:50% 55%;opacity:0}#top,#bot{z-index:5}#fx{z-index:6}.abs,#pill{z-index:10}</style>', 1)
     return h
 TICK = """(t)=>{const e=(a,b)=>Math.min(1,Math.max(0,(t-a)/(b-a))),s=x=>x*x*(3-2*x);
 const show=(sel,a,b,dy=24)=>{document.querySelectorAll(sel).forEach((el,i)=>{const k=s(e(a[i]??a[0],b[i]??b[0]));el.style.opacity=k;el.style.transform=(el.id=='pill'?'translateX(-50%) ':'')+'translateY('+((1-k)*dy)+'px)';});};
