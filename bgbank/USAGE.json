@@ -2,10 +2,12 @@
  "note": "bg file -> verses it was used for. Prefer an UNUSED file whose scene fits the verse; if none fit, reuse the least-used one (text differs). Update after each refill.",
  "n01": [],
  "n02": [
-  "3.9"
+  "3.9",
+  "17.20"
  ],
  "n03": [
-  "4.40"
+  "4.40",
+  "10.11"
  ],
  "n04": [
   "3.35"
@@ -23,7 +25,8 @@
   "4.38"
  ],
  "n09": [
-  "6.40"
+  "6.40",
+  "5.29"
  ],
  "n10": [
   "2.64"
@@ -119,9 +122,11 @@
   "12.12 (en+hi)"
  ],
  "s15": [
-  "10.9 (en+hi)"
+  "10.9 (en+hi)",
+  "16.2"
  ],
  "s20": [
-  "9.14 (en+hi)"
+  "9.14 (en+hi)",
+  "15.12"
  ]
 }
