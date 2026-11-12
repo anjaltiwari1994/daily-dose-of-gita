@@ -1,16 +1,16 @@
-"""Story-style Gita Reel (1080x1920 mp4, ~24.5 s, music, free). Same 4-part flow as the story carousels (gs_*):
-hook over a bgbank image -> the story -> what Krishna said (verse + meaning + one-line lesson) -> your turn (question, 3 steps, share line).
+"""Story-style Gita Reel (1080x1920 mp4, ~27 s, free). 3 scenes, same story flow as the story carousels (gs_*):
+hook over a bgbank image (3.5 s) -> the story (12 s) -> what Krishna said: verse + meaning + one-line lesson + share line (13 s).
+Music: synthesized tanpura drone + sitar phrases (tools/wow/sitar.py); a swarmandal sweep and a new phrase start on every scene change.
 Usage: python3 tools/render_reel_story.py input.json out.mp4
 input.json = {"bg":"bgbank/n07.png","big":"One quick scroll.\\nTwo hours gone.","tease":"Krishna's tortoise has the fix.",
  "story":["para 1","para 2","para 3"],"quote":"gold italic line","vtitle":"Pull your senses in, like a tortoise.",
- "san":"line1\\nline2","ref":"2.58","mean":"English meaning","tip":"one-line lesson",
- "q":"What steals your focus most?","steps":["..","..",".."],"share":"Send this to ..."}
-Scene 1 (hook) is on screen from frame 0. Cover: videoCoverMilliseconds 1000 (the 'your turn' scene)."""
+ "san":"line1\\nline2","ref":"2.58","mean":"English meaning","tip":"one-line lesson","share":"Send this to ..."}
+ (q/steps may be present; they are used only in the caption). Scene 1 (hook) is on screen from frame 0. Cover: videoCoverMilliseconds 1000."""
 import json, sys, os, tempfile, subprocess, base64, html
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__))); sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), 'wow'))
-import render_cards as rc, music
+import render_cards as rc, music, sitar
 
-DURS = [3.5, 12.0, 12.0, 10.0]; XF = 0.7
+DURS = [3.5, 12.0, 13.0]; XF = 0.7
 E = html.escape
 BASE = """*{box-sizing:border-box;margin:0;padding:0}
 body{width:1080px;height:1920px;position:relative;overflow:hidden;background:radial-gradient(ellipse at 50% 30%,#2B1E4A 0%,#15122F 55%,#0B0B22 100%)}
@@ -43,12 +43,13 @@ def s3(p):
     return wrap(f"<div class='pill'>WHAT KRISHNA SAID</div><div class='abs' id='vt'>{E(p['vtitle'])}</div>"
                 f"<div id='col'><div class='box' id='b1'><div id='san'>{san}</div><div class='rf'>— Bhagavad Gita {E(p['ref'])} —</div></div>"
                 f"<div class='box' id='b2'><div class='lb'>MEANING</div><div class='tx'>{E(p['mean'])}</div></div>"
-                f"<div class='box gold' id='b3'><div class='lb' style='color:#E8B14F'>TRY THIS TODAY</div><div class='tx b'>{E(p['tip'])}</div></div></div>",
+                f"<div class='box gold' id='b3'><div class='lb' style='color:#E8B14F'>TRY THIS TODAY</div><div class='tx b'>{E(p['tip'])}</div></div><div id='sh3'>{E(p['share'])}</div></div>",
                 "#vt{top:430px;font:700 58px 'Playfair Display';line-height:72px;color:#FFF6E5;padding:0 80px}"
                 "#col{position:absolute;left:70px;width:940px;top:640px;display:flex;flex-direction:column;gap:30px}.box{border:2px solid rgba(232,177,79,.22);border-radius:22px;background:rgba(255,255,255,.04);padding:30px 36px}"
                 ".gold{background:rgba(232,177,79,.10);border-color:rgba(232,177,79,.45)}"
                 "#b1{text-align:center}#san{font:400 40px 'Tiro Devanagari Hindi';line-height:64px;color:#E8B84A}"
                 ".rf{margin-top:10px;font:500 22px 'Inter';color:#B2A7CA}"
+                "#sh3{margin-top:14px;text-align:center;font:italic 500 42px 'Playfair Display';line-height:56px;color:#E8B14F}"
                 ".lb{font:700 22px 'Inter';letter-spacing:3px;color:#B2A7CA;margin-bottom:10px}.tx{font:400 36px 'Lora';line-height:50px;color:#FFF6E5}.tx.b{font-weight:600}")
 def s4(p):
     steps = ''.join(f"<div class='st'><span class='n'>{i+1}</span><span class='t'>{E(x)}</span></div>" for i, x in enumerate(p['steps']))
@@ -69,14 +70,16 @@ if __name__ == '__main__':
     tmp = tempfile.mkdtemp(); imgs = []
     with sync_playwright() as pw:
         b = pw.chromium.launch(); pg = b.new_page(viewport={'width': 1080, 'height': 1920})
-        for i, fn in enumerate([s1, s2, s3, s4]):
+        for i, fn in enumerate([s1, s2, s3]):
             pg.set_content(fn(p)); pg.wait_for_timeout(700)
             bad = pg.evaluate(CHECK); print('scene', i + 1, 'OVERFLOW ' + str(bad) if bad else 'ok')
             f = f'{tmp}/s{i}.png'; pg.screenshot(path=f); imgs.append(f)
         b.close()
     T = sum(DURS) - XF * (len(DURS) - 1)
-    music.make('gita', T, f'{tmp}/m.wav')
-    subprocess.run(['ffmpeg','-y','-loglevel','error','-i',f'{tmp}/m.wav','-af','aecho=0.8:0.7:90|180:0.35|0.2,lowpass=f=5000',f'{tmp}/m2.wav'],check=True)
+    cuts, c = [], 0.0
+    for d in DURS[:-1]: c += d - XF; cuts.append(c)
+    sitar.make(T, cuts, f'{tmp}/m.wav')
+    subprocess.run(['ffmpeg','-y','-loglevel','error','-i',f'{tmp}/m.wav','-af','aecho=0.8:0.6:70|140:0.25|0.12,lowpass=f=7000,loudnorm=I=-16:TP=-1.5:LRA=11',f'{tmp}/m2.wav'],check=True)
     args = ['ffmpeg','-y','-loglevel','error']
     for f, d in zip(imgs, DURS): args += ['-loop','1','-t',str(d),'-framerate','24','-i',f]
     args += ['-i', f'{tmp}/m2.wav']
