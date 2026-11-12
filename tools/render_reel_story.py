@@ -1,5 +1,5 @@
-"""Story-style Gita Reel (1080x1920 mp4, ~27 s, free). 3 scenes, same story flow as the story carousels (gs_*):
-hook over a bgbank image (3.5 s) -> the story (12 s) -> what Krishna said: verse + meaning + one-line lesson + share line (13 s).
+"""Story-style Gita Reel (1080x1920 mp4, ~29 s, free). 3 scenes, same story flow as the story carousels (gs_*):
+hook over a bgbank image (5.5 s) -> the story (12 s) -> what Krishna said: verse + meaning + one-line lesson + share line (13 s).
 Music: synthesized tanpura drone + sitar phrases (tools/wow/sitar.py); a swarmandal sweep and a new phrase start on every scene change.
 Usage: python3 tools/render_reel_story.py input.json out.mp4
 input.json = {"bg":"bgbank/n07.png","big":"One quick scroll.\\nTwo hours gone.","tease":"Krishna's tortoise has the fix.",
@@ -10,7 +10,7 @@ import json, sys, os, tempfile, subprocess, base64, html
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__))); sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), 'wow'))
 import render_cards as rc, music, sitar
 
-DURS = [3.5, 12.0, 13.0]; XF = 0.7
+DURS = [5.5, 12.0, 13.0]; XF = 0.7
 E = html.escape
 BASE = """*{box-sizing:border-box;margin:0;padding:0}
 body{width:1080px;height:1920px;position:relative;overflow:hidden;background:radial-gradient(ellipse at 50% 30%,#2B1E4A 0%,#15122F 55%,#0B0B22 100%)}
