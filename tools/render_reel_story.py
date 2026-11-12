@@ -5,12 +5,12 @@ input.json = {"bg":"bgbank/n07.png","big":"One quick scroll.\\nTwo hours gone.",
  "story":["para 1","para 2","para 3"],"quote":"gold italic line","vtitle":"Pull your senses in, like a tortoise.",
  "san":"line1\\nline2","ref":"2.58","mean":"English meaning","tip":"one-line lesson",
  "q":"What steals your focus most?","steps":["..","..",".."],"share":"Send this to ..."}
-Scene 1 (hook) is on screen from frame 0. Cover: videoCoverMilliseconds 23500 (the 'your turn' scene)."""
+Scene 1 (hook) is on screen from frame 0. Cover: videoCoverMilliseconds 1000 (the 'your turn' scene)."""
 import json, sys, os, tempfile, subprocess, base64, html
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__))); sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), 'wow'))
 import render_cards as rc, music
 
-DURS = [3.5, 7.5, 7.5, 7.5]; XF = 0.5
+DURS = [3.5, 12.0, 12.0, 10.0]; XF = 0.7
 E = html.escape
 BASE = """*{box-sizing:border-box;margin:0;padding:0}
 body{width:1080px;height:1920px;position:relative;overflow:hidden;background:radial-gradient(ellipse at 50% 30%,#2B1E4A 0%,#15122F 55%,#0B0B22 100%)}
