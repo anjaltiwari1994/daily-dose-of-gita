@@ -1,6 +1,8 @@
 {
  "note": "bg file -> verses it was used for. Prefer an UNUSED file whose scene fits the verse; if none fit, reuse the least-used one (text differs). Update after each refill.",
- "n01": [],
+ "n01": [
+  "17.8"
+ ],
  "n02": [
   "3.9",
   "17.20",
@@ -14,13 +16,16 @@
   "3.35"
  ],
  "n05": [
-  "2.3"
+  "2.3",
+  "2.56"
  ],
  "n06": [
-  "18.58"
+  "18.58",
+  "13.8"
  ],
  "n07": [
-  "3.43"
+  "3.43",
+  "2.59"
  ],
  "n08": [
   "4.38"
@@ -30,7 +35,8 @@
   "5.29"
  ],
  "n10": [
-  "2.64"
+  "2.64",
+  "5.20"
  ],
  "n11": [
   "6.26"
@@ -55,7 +61,8 @@
   "9.27"
  ],
  "n21": [
-  "family-pressure carousel"
+  "family-pressure carousel",
+  "18.9"
  ],
  "n22": [
   "2.66"
@@ -122,7 +129,8 @@
   "2.37 (en+hi)"
  ],
  "s10": [
-  "12.12 (en+hi)"
+  "12.12 (en+hi)",
+  "16.3"
  ],
  "s15": [
   "10.9 (en+hi)",
