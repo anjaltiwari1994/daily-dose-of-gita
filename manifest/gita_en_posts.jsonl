@@ -5,3 +5,9 @@
 {"date": "2026-12-03", "slot": "12:00", "type": "REEL", "variant": "B", "ans": "", "encore": false, "encore_of": "", "ref": "6.23", "hook": "Heartbroken and can't move on?", "bg": "bgbank/n19.png", "files": ["reels/gsh2_heartbreak.mp4"]}
 {"date": "2026-12-04", "slot": "12:00", "type": "REEL", "variant": "A", "ans": "Gita 2.55: the wise find contentment within themselves.", "encore": false, "encore_of": "", "ref": "2.55", "hook": "Feel misunderstood by everyone?", "bg": "bgbank/s16.png", "files": ["reels/gsh2_misunderstood.mp4"]}
 {"date": "2026-12-05", "slot": "12:00", "type": "REEL", "variant": "B", "ans": "", "encore": false, "encore_of": "", "ref": "18.73", "hook": "Feeling lost in your own life?", "bg": "bgbank/s09.png", "files": ["reels/gsh2_lost.mp4"]}
+{"date": "2026-11-29", "slot": "19:00", "type": "CAROUSEL", "ref": "18.30", "hook": "Can't decide what's right?", "bg": "bgbank/n12.png", "files": ["cards/gfe_18_30_hook.png", "cards/gfe_18_30_s2.png"]}
+{"date": "2026-11-30", "slot": "19:00", "type": "CAROUSEL", "ref": "5.3", "hook": "Can't let go of a grudge?", "bg": "bgbank/s10.png", "files": ["cards/gfe_5_3_hook.png", "cards/gfe_5_3_s2.png"]}
+{"date": "2026-12-01", "slot": "19:00", "type": "CAROUSEL", "ref": "2.61", "hook": "Losing to your own cravings?", "bg": "bgbank/n07.png", "files": ["cards/gfe_2_61_hook.png", "cards/gfe_2_61_s2.png"]}
+{"date": "2026-12-02", "slot": "19:00", "type": "CAROUSEL", "ref": "7.8", "hook": "Does life feel empty lately?", "bg": "bgbank/s12.png", "files": ["cards/gfe_7_8_hook.png", "cards/gfe_7_8_s2.png"]}
+{"date": "2026-12-03", "slot": "19:00", "type": "CAROUSEL", "ref": "12.9", "hook": "Frustrated by slow progress?", "bg": "bgbank/s06.png", "files": ["cards/gfe_12_9_hook.png", "cards/gfe_12_9_s2.png"]}
+{"date": "2026-12-04", "slot": "19:00", "type": "CAROUSEL", "ref": "7.11", "hook": "Feel powerless right now?", "bg": "bgbank/n23.png", "files": ["cards/gfe_7_11_hook.png", "cards/gfe_7_11_s2.png"]}
