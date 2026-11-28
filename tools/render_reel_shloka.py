@@ -4,7 +4,9 @@ Scene 2 verse (10 s): Sanskrit lines appear one by one, then the meaning. Scene 
 Music: tools/wow/sitar.py (tanpura + sitar, phrase on each scene change) + dhol hits at 0 s and on line 2.
 Usage: python3 tools/render_reel_shloka.py input.json out.mp4
 input.json = {"bg":"bgbank/n22.png","big":"Feeling alone\\neven in a full room?","san":"line1\\nline2","ref":"6.30",
- "mean":"faithful English meaning (~150 chars)","tip":"one-line lesson (~60 chars)","share":"Send this to ..."}"""
+ "mean":"faithful English meaning (~150 chars)","tip":"one-line lesson (~60 chars)","share":"Send this to ..."}
+Optional "ans" (value-first variant A, 27 Nov 2026): a one-line answer (45-70 chars, 'Gita <ch>.<v>: ...') shown under the hook from 1.8 s.
+ With "ans" the hook moves up (top 520px), the answer sits at top 860px and the background dim is 0.55; without it scene 1 is exactly as before."""
 import json, sys, os, tempfile, subprocess, html, base64, wave
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__))); sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), 'wow'))
 import render_cards as rc, sitar, numpy as np
@@ -21,10 +23,15 @@ def page(inner, css, bg, dim):
             f"{inner}</body>{JS}</html>")
 
 def s1(p):
-    l1, l2 = p['big'].split('\n')
-    return page(f"<div id='big' data-shake='{L2}'><div>{E(l1)}</div><div class='l2' data-in='{L2}' data-k='slam' data-d='0.28'>{E(l2)}</div></div>",
-                "#big{position:absolute;left:0;width:1080px;top:640px;text-align:center;font:700 92px 'Playfair Display';line-height:112px;color:#FFF6E5;padding:0 50px;text-shadow:0 6px 30px rgba(0,0,0,.85)}"
-                "#big .l2{color:#FFD27A}", p['bg'], .38)
+    l1, l2 = p['big'].split('\n'); ans = p.get('ans', '').strip()
+    hook = f"<div id='big' data-shake='{L2}'><div>{E(l1)}</div><div class='l2' data-in='{L2}' data-k='slam' data-d='0.28'>{E(l2)}</div></div>"
+    css = ("#big{position:absolute;left:0;width:1080px;top:640px;text-align:center;font:700 92px 'Playfair Display';line-height:112px;color:#FFF6E5;padding:0 50px;text-shadow:0 6px 30px rgba(0,0,0,.85)}"
+           "#big .l2{color:#FFD27A}")
+    if not ans:
+        return page(hook, css, p['bg'], .38)
+    return page(hook + f"<div class='abs' id='ans' data-in='1.8' data-k='up' data-d='0.6'>{E(ans)}</div>",
+                css.replace('top:640px', 'top:520px') +
+                "#ans{top:860px;font:500 54px 'Lora';line-height:74px;color:#FFF6E5;padding:0 90px;text-shadow:0 3px 18px rgba(0,0,0,.9)}", p['bg'], .55)
 def s2(p):
     lines = p['san'].split('\n'); t = [0.3 + 0.9 * i for i in range(len(lines))]
     san = ''.join(f"<div data-in='{t[i]:.2f}' data-k='up' data-d='0.7'>{E(l)}</div>" for i, l in enumerate(lines))
@@ -45,6 +52,7 @@ def s3(p):
 
 CHECK = """()=>{const bad=[];document.querySelectorAll('body *').forEach(el=>{const r=el.getBoundingClientRect();if(r.height>0&&r.height<1900&&(r.right>1081||r.left<-1||r.bottom>1780))bad.push((el.id||el.className||el.tagName)+':'+Math.round(r.bottom));});
  const a=document.querySelector('#san'),b=document.querySelector('#mn');if(a&&b&&a.getBoundingClientRect().bottom>b.getBoundingClientRect().top-20)bad.push('san/mn overlap');
+ const e=document.querySelector('#big'),g=document.querySelector('#ans');if(e&&g&&e.getBoundingClientRect().bottom>g.getBoundingClientRect().top-20)bad.push('big/ans overlap');
  const c=document.querySelector('#tp'),d=document.querySelector('#sh');if(c&&d&&c.getBoundingClientRect().bottom>d.getBoundingClientRect().top-20)bad.push('tip/share overlap');return bad.slice(0,6);}"""
 
 if __name__ == '__main__':

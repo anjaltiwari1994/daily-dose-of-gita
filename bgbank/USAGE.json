@@ -1,7 +1,8 @@
 {
  "note": "bg file -> verses it was used for. Prefer an UNUSED file whose scene fits the verse; if none fit, reuse the least-used one (text differs). Update after each refill.",
  "n01": [
-  "17.8"
+  "17.8",
+  "15.7 reel"
  ],
  "n02": [
   "3.9",
@@ -47,7 +48,8 @@
   "3.8"
  ],
  "n13": [
-  "work-stress carousel"
+  "work-stress carousel",
+  "3.30 encore reel"
  ],
  "n14": [
   "18.37"
@@ -56,10 +58,14 @@
   "3.21",
   "18.33 (card)"
  ],
- "n16": [],
+ "n16": [
+  "2.30 reel"
+ ],
  "n17": [],
  "n18": [],
- "n19": [],
+ "n19": [
+  "6.23 reel"
+ ],
  "n20": [
   "9.27"
  ],
@@ -75,7 +81,8 @@
   "18.45"
  ],
  "r01": [
-  "6.25 reel"
+  "6.25 reel",
+  "4.20 reel"
  ],
  "r02": [
   "18.26 reel"
@@ -89,7 +96,8 @@
   "18.65"
  ],
  "s16": [
-  "14.24 (en+hi)"
+  "14.24 (en+hi)",
+  "2.55 reel"
  ],
  "s11": [
   "6.45 (en+hi)"
@@ -105,7 +113,8 @@
   "2.69 (en+hi)"
  ],
  "s09": [
-  "2.7 (en+hi)"
+  "2.7 (en+hi)",
+  "18.73 reel"
  ],
  "s02": [
   "18.54 (en+hi)",
